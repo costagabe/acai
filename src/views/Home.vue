@@ -32,14 +32,10 @@ export default {
   data: () => ({
     containerHeight: 0,
     orders: []
+
   }),
   mounted () {
     this.containerHeight = this.$refs.container.clientHeight
-  },
-  watch: {
-    '$vuetify.breakpoint.width' () {
-      this.$emit('update')
-    }
   }
 
 }

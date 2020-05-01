@@ -9,6 +9,7 @@
       <h1>Nenhum pedido realizado</h1>
       <v-btn
         v-if="!isMobile"
+        @click="$router.push('/order')"
         block
         color="primary"
         large

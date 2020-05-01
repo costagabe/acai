@@ -7,6 +7,7 @@
   >
     <v-btn
       v-if="isMobile"
+      @click="$router.push('/order')"
       bottom
       color="primary"
       dark
@@ -16,6 +17,7 @@
     </v-btn>
     <v-btn
       v-else
+      @click="$router.push('/order')"
       block
       bottom
       color="primary"
