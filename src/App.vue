@@ -5,56 +5,41 @@
       color="primary"
       dark
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <h2>Açaí</h2>
     </v-app-bar>
-
     <v-content>
-      <HelloWorld/>
+      <v-container
+        :key="key"
+        class="fill-height"
+      >
+        <router-view @update="key++" />
+      </v-container>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import Acai from './models/Acai'
+import AcaiItem from './models/AcaiItem'
 
 export default {
   name: 'App',
-
-  components: {
-    HelloWorld
-  },
-
   data: () => ({
-    //
-  })
+    key: 0
+  }),
+  created () {
+    const acaiSize = new AcaiItem('500 ml', 10, 10, '')
+    const acaiFlavor = new AcaiItem('Morango', 0, 10, '')
+    const person1 = new AcaiItem('Paçoca', 3, 3, '')
+    const acai = new Acai(acaiSize, acaiFlavor)
+    acai.addCustomization(person1)
+  }
+
 }
 </script>
+
+<style>
+html::-webkit-scrollbar {
+  display: none;
+}
+</style>

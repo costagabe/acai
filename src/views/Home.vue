@@ -1,18 +1,64 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-container
+    class="fill-height"
+    ref="container"
+  >
+    <v-row
+      align="start"
+      align-content="start"
+      class="fill-height"
+      justify="center"
+    >
+      <OrderList
+        :containerHeight="containerHeight"
+        :orders="orders"
+      />
+
+      <v-col
+        align-self="end"
+        class="pa-0 ma-0 pb-4"
+        cols="auto"
+        style="margin-bottom: auto; position: fixed"
+      >
+        <v-btn
+          bottom
+          color="primary"
+          dark
+          fab
+        >
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
+
+  </v-container>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    OrderList: () => import('@/components/home/OrderList')
+  },
+  data: () => ({
+    containerHeight: 0,
+    orders: []
+  }),
+  mounted () {
+    this.containerHeight = this.$refs.container.clientHeight
+  },
+
+  watch: {
+    '$vuetify.breakpoint.width' () {
+      this.$emit('update')
+    }
   }
+
 }
 </script>
+
+<style scoped>
+.list::-webkit-scrollbar {
+  display: none;
+}
+</style>
