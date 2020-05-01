@@ -10,9 +10,18 @@
       justify="center"
     >
       <OrderList
+        v-if="orders.length"
         :containerHeight="containerHeight"
         :orders="orders"
       />
+      <v-row
+        v-else
+        align="center"
+        class="fill-height text-center primary--text"
+        justify="center"
+      >
+        <h1>Nenhum pedido realizado</h1>
+      </v-row>
 
       <v-col
         align-self="end"
