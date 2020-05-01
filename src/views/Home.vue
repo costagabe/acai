@@ -14,30 +14,8 @@
         :containerHeight="containerHeight"
         :orders="orders"
       />
-      <v-row
-        v-else
-        align="center"
-        class="fill-height text-center primary--text"
-        justify="center"
-      >
-        <h1>Nenhum pedido realizado</h1>
-      </v-row>
-
-      <v-col
-        align-self="end"
-        class="pa-0 ma-0 pb-4"
-        cols="auto"
-        style="margin-bottom: auto; position: fixed"
-      >
-        <v-btn
-          bottom
-          color="primary"
-          dark
-          fab
-        >
-          <v-icon>mdi-plus</v-icon>
-        </v-btn>
-      </v-col>
+      <NoOrders v-else />
+      <NewOrderBtn v-if="orders.length || isMobile" />
     </v-row>
 
   </v-container>
@@ -47,7 +25,9 @@
 export default {
   name: 'Home',
   components: {
-    OrderList: () => import('@/components/home/OrderList')
+    OrderList: () => import('@/components/home/OrderList'),
+    NewOrderBtn: () => import('@/components/home/NewOrderBtn'),
+    NoOrders: () => import('@/components/home/NoOrders')
   },
   data: () => ({
     containerHeight: 0,
@@ -56,7 +36,6 @@ export default {
   mounted () {
     this.containerHeight = this.$refs.container.clientHeight
   },
-
   watch: {
     '$vuetify.breakpoint.width' () {
       this.$emit('update')
