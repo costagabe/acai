@@ -16,6 +16,7 @@ describe('Component Stepper', () => {
   let store
   let factory
   let router
+  let wrapper
   beforeEach(() => {
     router = new VueRouter({
       mode: 'history',
@@ -79,6 +80,10 @@ describe('Component Stepper', () => {
         router
       })
     }
+    wrapper = factory(Stepper, {
+      isMobile: false,
+      step: 1
+    })
   })
   it('Verifica se aperece o título do step se for mobile', () => {
     const wrapper = factory(Stepper, {
@@ -93,16 +98,12 @@ describe('Component Stepper', () => {
     expect(wrapper.find('h1').exists()).eq(false)
   })
   describe('Verificações nas steps', () => {
-    let wrapper
     let leftBtn
     let rightBtn
-
     describe('Step 1', () => {
-      beforeEach(() => {
-        wrapper = factory(Stepper, {
-          isMobile: false,
-          step: 1
-        })
+      beforeEach(async () => {
+        wrapper.vm.step = 1
+        await wrapper.vm.$nextTick()
         leftBtn = wrapper.find({ ref: 'leftBtn' })
         rightBtn = wrapper.find({ ref: 'rightBtn' })
       })
@@ -116,7 +117,6 @@ describe('Component Stepper', () => {
         await wrapper.vm.$nextTick()
         expect(wrapper.vm.form.size).eq(obj)
       })
-
       it('Botão "anterior" bloqueado e "pŕoximo" liberado', () => {
         expect(leftBtn.vm.disabled).eq(true)
         expect(rightBtn.vm.disabled).eq(false)
@@ -134,10 +134,8 @@ describe('Component Stepper', () => {
     })
     describe('Step 2', () => {
       beforeEach(async () => {
-        wrapper = factory(Stepper, {
-          isMobile: false,
-          step: 2
-        })
+        wrapper.vm.step = 2
+        await wrapper.vm.$nextTick()
         leftBtn = wrapper.find({ ref: 'leftBtn' })
         rightBtn = wrapper.find({ ref: 'rightBtn' })
       })
@@ -171,11 +169,9 @@ describe('Component Stepper', () => {
     })
     describe('Step 3', () => {
       let makeOrderBtn
-      beforeEach(() => {
-        wrapper = factory(Stepper, {
-          isMobile: false,
-          step: 3
-        })
+      beforeEach(async () => {
+        wrapper.vm.step = 3
+        await wrapper.vm.$nextTick()
         leftBtn = wrapper.find({ ref: 'leftBtn' })
         rightBtn = wrapper.find({ ref: 'rightBtn' })
         makeOrderBtn = wrapper.find({ ref: 'makeOrderBtn' })

@@ -9,15 +9,18 @@
         <v-list-item
           :key="item.id"
           :value="item"
+          class="v-list-item"
         >
           <template>
             <v-list-item-content>
-              <v-list-item-title v-text="item.description"></v-list-item-title>
-              <div v-if="item.cost" style="font-size: 12px">R$ {{item.cost}},00</div>
+              <v-list-item-title>{{item.description}}</v-list-item-title>
+              <div
+                v-if="item.cost"
+                style="font-size: 12px"
+              >R$ {{item.cost}},00</div>
             </v-list-item-content>
           </template>
         </v-list-item>
-
         <v-divider :key="'0'+i" />
       </template>
     </v-list-item-group>
