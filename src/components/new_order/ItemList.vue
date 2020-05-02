@@ -2,7 +2,7 @@
   <v-list two-line>
     <v-list-item-group
       v-model="selected"
-      active-class="primary--text"
+      active-class="white--text primary"
       :multiple="multiple"
     >
       <template v-for="(item, i) in items">
@@ -13,7 +13,7 @@
           <template>
             <v-list-item-content>
               <v-list-item-title v-text="item.description"></v-list-item-title>
-              <v-list-item-subtitle v-if="item.cost">R$ {{item.cost}},00</v-list-item-subtitle>
+              <div v-if="item.cost" style="font-size: 12px">R$ {{item.cost}},00</div>
             </v-list-item-content>
           </template>
         </v-list-item>

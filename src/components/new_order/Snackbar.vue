@@ -14,10 +14,9 @@
 <script>
 export default {
   name: 'SnackbarComponent',
-  props: {
-    notification: {
-      required: true,
-      type: Object
+  computed: {
+    notification () {
+      return this.$store.state.notification
     }
   }
 }

@@ -10,8 +10,9 @@
         cols="12"
         lg="3"
         md="4"
+        sm="6"
       >
-        <OrderCard />
+        <OrderCard :order="order" />
       </v-col>
     </v-row>
   </v-col>

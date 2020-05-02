@@ -12,13 +12,18 @@ const routes = [
   },
   {
     path: '/order',
-    name: 'Order',
+    name: 'NewOrder',
     component: () => import('@/views/NewOrder')
+  },
+  {
+    path: '/order/:id',
+    name: 'Order',
+    component: () => import('@/views/Order')
   }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })

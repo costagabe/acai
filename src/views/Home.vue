@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'Home',
   components: {
@@ -29,11 +30,19 @@ export default {
     NewOrderBtn: () => import('@/components/home/NewOrderBtn'),
     NoOrders: () => import('@/components/home/NoOrders')
   },
+  computed: {
+    ...mapState(['orders'])
+  },
+  created () {
+    this.initOrders()
+  },
   data: () => ({
-    containerHeight: 0,
-    orders: []
+    containerHeight: 0
 
   }),
+  methods: {
+    ...mapActions(['initOrders'])
+  },
   mounted () {
     this.containerHeight = this.$refs.container.clientHeight
   }

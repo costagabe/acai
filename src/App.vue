@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <Snackbar />
     <v-app-bar
       app
       color="primary"
@@ -16,14 +17,14 @@
 </template>
 
 <script>
-
 export default {
   name: 'App',
+  components: {
+    Snackbar: () => import('@/components/NewOrder/Snackbar')
+  },
   data: () => ({
     key: 0
   }),
-  created () {
-  },
   watch: {
     // Quando o usuário mudar o tamanho da página, recarregar tudo para que não haja quebras no layout
     '$vuetify.breakpoint.width' () {

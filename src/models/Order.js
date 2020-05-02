@@ -1,5 +1,5 @@
-export default class Acai {
-  constructor (size, flavor, id, customizations = []) {
+export default class Order {
+  constructor ({ size, flavor, id, customizations = [] }) {
     this.size = size
     this.flavor = flavor
     this.customizations = customizations

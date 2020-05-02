@@ -1,6 +1,6 @@
 <template>
   <v-card
-    @click="() => ({})"
+    @click="$router.push(`/order/${order.id}`)"
     class="pa-2"
     elevation="5"
   >
@@ -22,14 +22,14 @@
         style="font-size: 16px"
       >
         <div>
-          Açaí de morango
+          Açaí de {{order.flavor.description.toLowerCase()}}
         </div>
         <div>
-          500ml
+          {{order.size.description}}
         </div>
         <div>
-          <v-icon>mdi-alarm</v-icon> 50min
-          <v-icon>mdi-currency-usd</v-icon> 40,00
+          <v-icon class="mb-1">mdi-alarm</v-icon> {{order.time}}min
+          <v-icon class="mb-1">mdi-currency-usd</v-icon> {{order.cost}},00
         </div>
       </v-col>
     </v-row>
@@ -38,6 +38,12 @@
 
 <script>
 export default {
-  name: 'OrderCardComponent'
+  name: 'OrderCardComponent',
+  props: {
+    order: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

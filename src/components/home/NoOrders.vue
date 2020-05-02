@@ -5,7 +5,11 @@
     class="fill-height text-center primary--text"
     justify="center"
   >
-    <v-col cols="auto">
+    <Loading />
+    <v-col
+      v-if="!$store.state.loading"
+      cols="auto"
+    >
       <h1>Nenhum pedido realizado</h1>
       <v-btn
         v-if="!isMobile"
