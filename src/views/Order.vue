@@ -19,6 +19,15 @@
           >
             <h2>Detalhes do pedido #{{$route.params.id}}</h2>
           </v-app-bar>
+
+          <v-row
+            v-if="error"
+            class="py-4"
+            justify="center"
+          >
+            <h1 class="primary--text">{{error}}</h1>
+          </v-row>
+
           <v-card-text v-if="order">
             <ItemDescription
               :item="order.size"
@@ -58,6 +67,7 @@
           </v-card-text>
           <v-row
             v-else
+            class="no-gutters"
             justify="center"
           >
             <v-col cols="auto">
@@ -74,7 +84,6 @@
               Novo Pedido
             </v-btn>
           </v-card-actions>
-
         </v-card>
       </v-col>
     </v-row>
@@ -96,6 +105,7 @@ export default {
       const res = await axios.get(`/order/${id}`)
       this.order = new Order(res.data)
     } catch (e) {
+      this.error = 'Produto indisponível'
       if (e.response && e.response.status === 404) {
         this.showNotification('Pedido não encontrado', 'red darken-3')
       } else {
@@ -105,7 +115,8 @@ export default {
     }
   },
   data: () => ({
-    order: null
+    order: null,
+    error: ''
   })
 }
 </script>

@@ -104,17 +104,25 @@ export default {
     ...mapState(['customizations', 'flavors', 'loading', 'sizes'])
   },
   async created () {
-    await this.initItems()
+    try {
+      await this.initItems()
+    } catch (e) {
+      this.showNotification('Erro ao receber dados do servidor', 'red darken-3')
+    }
     this.initStepper()
   },
 
   methods: {
     ...mapActions(['enviarPedido', 'initItems']),
     async enviar () {
-      const order = await this.enviarPedido(this.form)
-      const id = order.data.id
-      this.showNotification('Pedido enviado com sucesso', 'green darken-3')
-      this.$router.push(`/order/${id}`)
+      try {
+        const order = await this.enviarPedido(this.form)
+        const id = order.data.id
+        this.showNotification('Pedido enviado com sucesso', 'green darken-3')
+        this.$router.push(`/order/${id}`)
+      } catch {
+        this.showNotification('Erro ao enviar pedido', 'red darken-3')
+      }
     },
     initStepper () {
       this.stepper = {

@@ -91,7 +91,6 @@ describe('Component Stepper', () => {
   })
   it('Lista está sendo renderizada', async () => {
     const lines = wrapper.findAll('.v-list-item')
-    console.log(wrapper.findAll('.v-list-item').at(0).html())
     expect(lines.length).eq(items.length)
     expect(lines.at(0).html()).include('test')
     expect(lines.at(0).html()).include('R$ 1,00')
