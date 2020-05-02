@@ -3,7 +3,7 @@
       v-model="notification.show"
       :color="notification.color"
       :timeout="4000"
-      @click="notification.show = false"
+      @click.native="notification.show = false"
       top
     >
       {{ notification.content }}

@@ -1,6 +1,6 @@
 <template>
   <v-card
-    @click="$router.push(`/order/${order.id}`)"
+    @click.native="$router.push(`/order/${order.id}`)"
     class="pa-2"
     elevation="5"
   >

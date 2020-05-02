@@ -66,7 +66,7 @@
           </v-row>
           <v-card-actions>
             <v-btn
-              @click="$router.push('/order/')"
+              @click.native="$router.push('/order/')"
               block
               color="primary"
               rounded

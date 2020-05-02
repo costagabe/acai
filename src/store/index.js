@@ -5,7 +5,7 @@ import Order from '../models/Order'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+export const store = new Vuex.Store({
   state: () => ({
     customizations: [],
     flavors: [],

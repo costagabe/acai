@@ -9,16 +9,21 @@
       class="fill-height"
       justify="center"
     >
-      <v-col cols="11" md="6" lg="5" xl="4">
-        <v-btn
-        @click="$router.push('/order')"
-        block
-        color="primary"
-        large
-        rounded
+      <v-col
+        cols="11"
+        md="6"
+        lg="5"
+        xl="4"
       >
-        <b>Novo Pedido</b>
-      </v-btn>
+        <v-btn
+          @click.native="$router.push('/order')"
+          block
+          color="primary"
+          large
+          rounded
+        >
+          <b>Novo Pedido</b>
+        </v-btn>
       </v-col>
     </v-row>
 

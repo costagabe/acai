@@ -42,20 +42,22 @@
                   cols="12"
                 >
                   <v-btn
-                    @click="enviar"
+                    @click.native="enviar"
                     :loading="loading"
                     block
                     color="primary"
                     large
+                    ref="makeOrderBtn"
                   >
                     Realizar Pedido
                   </v-btn>
                 </v-col>
                 <v-btn
                   :disabled="step === 1"
-                  @click="prev"
+                  @click.native="prev"
                   color="primary"
                   fab
+                  ref="leftBtn"
                 >
                   <v-icon>mdi-arrow-left</v-icon>
                 </v-btn>
@@ -63,10 +65,11 @@
                 <v-btn
                   :disabled="step === 3"
                   :loading="loading"
-                  @click="next"
+                  @click.native="next"
                   class=""
                   color="primary"
                   fab
+                  ref="rightBtn"
                 >
                   <v-icon>mdi-arrow-right</v-icon>
                 </v-btn>
