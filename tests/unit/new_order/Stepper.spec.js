@@ -1,100 +1,38 @@
 /* eslint-disable no-unused-vars */
 import { expect } from 'chai'
-import { shallowMount, createLocalVue } from '@vue/test-utils'
-import Vuex from 'vuex'
-import VueRouter from 'vue-router'
 
-import Loading from '@/components/Loading'
+import factory from '../utils/Factory'
 import Stepper from '@/components/new_order/Stepper.vue'
 import ItemList from '@/components/new_order/ItemList.vue'
-const localVue = createLocalVue()
-localVue.use(VueRouter)
-localVue.use(Vuex)
-localVue.component('Loading', Loading)
 
-describe('Component Stepper', () => {
-  let store
-  let factory
-  let router
+const data = {
+  form: { size: null, flavor: null, customizations: null },
+  stepper: {
+    titles: ['Tamanho', 'Sabor', 'Adicionais'],
+    pages: [
+      { items: [], form: '' },
+      { items: [], form: '' },
+      { items: [], form: '' }
+    ]
+  }
+}
+describe('Component NewOrder/Stepper', () => {
   let wrapper
   beforeEach(() => {
-    router = new VueRouter({
-      mode: 'history',
-      base: process.env.BASE_URL,
-      routes: []
-    })
-    store = new Vuex.Store({
-      state: () => ({
-        customizations: [{ id: 3 }],
-        flavors: [],
-        loading: false,
-        notification: {
-          show: false,
-          color: ''
-        },
-        orders: [{ id: 2 }],
-        sizes: [{ id: 1 }]
-      }),
-      mutations: {
-        setLoading (state, payload) {
-          state.loading = payload
-        }
-      },
-      actions: {
-        enviarPedido ({ state }) {
-          state.notification.show = true
-          return { data: { id: 1 } }
-        },
-        initItems ({ commit }) {
-          commit('setLoading', false)
-          setTimeout(() => {
-            commit('setLoading', false)
-          }, 200)
-        }
-      }
-    })
-    factory = (component, values = {}) => {
-      return shallowMount(component, {
-        data () {
-          return {
-            isMobile: false,
-            ...values,
-            form: { size: null, flavor: null, customizations: null },
-            stepper: {
-              titles: ['Tamanho', 'Sabor', 'Adicionais'],
-              pages: [
-                { items: [], form: '' },
-                { items: [], form: '' },
-                { items: [], form: '' }
-              ]
-            }
-          }
-        },
-        methods: {
-          showNotification () {
-            this.$store.state.notification.show = true
-          }
-        },
-        store,
-        localVue,
-        router
-      })
-    }
     wrapper = factory(Stepper, {
       isMobile: false,
-      step: 1
+      step: 1,
+      ...data
     })
   })
-  it('Verifica se aperece o título do step se for mobile', () => {
-    const wrapper = factory(Stepper, {
-      isMobile: true
-    })
+  it('Verifica se aperece o título do step se for mobile', async () => {
+    wrapper.vm.isMobile = true
+    await wrapper.vm.$nextTick()
     expect(wrapper.find('h1').exists()).eq(true)
   })
-  it('Verifica se esconde o título do step se não for mobile', () => {
-    const wrapper = factory(Stepper, {
-      isMobile: false
-    })
+  it('Verifica se esconde o título do step se não for mobile', async () => {
+    wrapper.vm.isMobile = false
+    await wrapper.vm.$nextTick()
     expect(wrapper.find('h1').exists()).eq(false)
   })
   describe('Verificações nas steps', () => {
@@ -108,15 +46,6 @@ describe('Component Stepper', () => {
         rightBtn = wrapper.find({ ref: 'rightBtn' })
       })
 
-      it('Ao clicar em um item da lista, preencher o formulário corretamente', async () => {
-        await wrapper.vm.$nextTick()
-        const list = wrapper.findAll(ItemList).at(0)
-        expect(list.exists()).eq(true)
-        const obj = list.vm.items[0]
-        list.vm.selected = obj
-        await wrapper.vm.$nextTick()
-        expect(wrapper.vm.form.size).eq(obj)
-      })
       it('Botão "anterior" bloqueado e "pŕoximo" liberado', () => {
         expect(leftBtn.vm.disabled).eq(true)
         expect(rightBtn.vm.disabled).eq(false)
@@ -130,6 +59,15 @@ describe('Component Stepper', () => {
         wrapper.vm.form.size = {}
         await rightBtn.trigger('click')
         expect(wrapper.vm.step).eq(2)
+      })
+      it('Ao clicar em um item da lista, preencher o formulário corretamente', async () => {
+        await wrapper.vm.$nextTick()
+        const list = wrapper.findAll(ItemList).at(0)
+        expect(list.exists()).eq(true)
+        const obj = list.vm.items[0]
+        list.vm.selected = obj
+        await wrapper.vm.$nextTick()
+        expect(wrapper.vm.form.size).eq(obj)
       })
     })
     describe('Step 2', () => {
