@@ -16,7 +16,6 @@ Vue.mixin({
   },
   methods: {
     showNotification (msg, color = 'yellow darken-3') {
-      console.log(this.$store.state)
       this.$store.state.notification.show = false
       this.$nextTick(() => {
         this.$store.state.notification.show = true

@@ -11,17 +11,6 @@
       cols="auto"
     >
       <h1>Nenhum pedido realizado</h1>
-      <v-btn
-        v-if="!isMobile"
-        @click="$router.push('/order')"
-        block
-        color="primary"
-        large
-        rounded
-      >
-        <b>Novo Pedido</b>
-      </v-btn>
     </v-col>
-
   </v-row>
 </template>

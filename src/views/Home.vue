@@ -4,49 +4,36 @@
     ref="container"
   >
     <v-row
-      align="start"
-      align-content="start"
+      align="center"
+      align-content="center"
       class="fill-height"
       justify="center"
     >
-      <OrderList
-        v-if="orders.length"
-        :containerHeight="containerHeight"
-        :orders="orders"
-      />
-      <NoOrders v-else />
-      <NewOrderBtn v-if="orders.length || isMobile" />
+      <v-col cols="11" md="6" lg="5" xl="4">
+        <v-btn
+        @click="$router.push('/order')"
+        block
+        color="primary"
+        large
+        rounded
+      >
+        <b>Novo Pedido</b>
+      </v-btn>
+      </v-col>
     </v-row>
 
   </v-container>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
 export default {
   name: 'Home',
-  components: {
-    OrderList: () => import('@/components/home/OrderList'),
-    NewOrderBtn: () => import('@/components/home/NewOrderBtn'),
-    NoOrders: () => import('@/components/home/NoOrders')
-  },
-  computed: {
-    ...mapState(['orders'])
-  },
-  created () {
-    this.initOrders()
-  },
   data: () => ({
     containerHeight: 0
-
   }),
-  methods: {
-    ...mapActions(['initOrders'])
-  },
   mounted () {
     this.containerHeight = this.$refs.container.clientHeight
   }
-
 }
 </script>
 

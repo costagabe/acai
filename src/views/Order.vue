@@ -12,10 +12,7 @@
         xl="4"
       >
 
-        <v-card
-          class="fill-height"
-          elevation="5"
-        >
+        <v-card elevation="5">
           <v-app-bar
             color="primary"
             dark
@@ -47,6 +44,17 @@
               title="Total: "
             />
             <v-divider />
+            <v-row justify="space-between">
+              <v-col cols="auto">
+                Tempo
+              </v-col>
+              <v-col cols="auto">
+                <v-icon>
+                  mdi-alarm
+                </v-icon>
+                {{order.time}} min
+              </v-col>
+            </v-row>
           </v-card-text>
           <v-row
             v-else
@@ -56,6 +64,16 @@
               <Loading />
             </v-col>
           </v-row>
+          <v-card-actions>
+            <v-btn
+              @click="$router.push('/order/')"
+              block
+              color="primary"
+              rounded
+            >
+              Novo Pedido
+            </v-btn>
+          </v-card-actions>
 
         </v-card>
       </v-col>

@@ -20,7 +20,7 @@
 export default {
   name: 'App',
   components: {
-    Snackbar: () => import('@/components/NewOrder/Snackbar')
+    Snackbar: () => import('@/components/Snackbar')
   },
   data: () => ({
     key: 0
