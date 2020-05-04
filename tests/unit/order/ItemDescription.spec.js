@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { expect } from 'chai'
 import ItemDescription from '@/components/order/ItemDescription.vue'
 import factory from '../utils/Factory'
